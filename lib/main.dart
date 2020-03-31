@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'card.dart';
+import 'fieldTemplate.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -23,60 +25,7 @@ class Work {
 
 List<Work> todoList = [];
 
-///////////////////
-///card Template
-class Task extends StatelessWidget {
-  final String _title;
-  final String _subtitle;
-  final VoidCallback onDelete;
-  final VoidCallback onComplete;
-
-  Task(this._title, this._subtitle, {this.onDelete, this.onComplete});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-          color: Colors.yellow[50],
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.work),
-                title: Text(_title),
-                subtitle: Text(_subtitle),
-              ),
-              ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                    child: Text("Completed",
-                        style: TextStyle(
-                            color: Colors.orangeAccent,
-                            fontFamily: "Roboto",
-                            fontSize: 15)),
-                    onPressed: () {
-                      onComplete();
-                    },
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      onDelete();
-                    },
-                    child: Text("Remove",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontFamily: "Roboto",
-                            fontSize: 15)),
-                  )
-                ],
-              )
-            ],
-          )),
-    );
-  }
-}
-
-///////////
+///MainPage
 
 class TodoList extends StatefulWidget {
   @override
@@ -165,38 +114,7 @@ class _TodoListState extends State<TodoList> {
   }
 }
 
-class Field extends StatelessWidget {
-  final TextEditingController handler;
-  final String _hintText;
-  final String _labelText;
-  Field(this.handler, this._hintText, this._labelText);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      child: TextFormField(
-        controller: handler,
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          icon: Icon(
-            Icons.work,
-            color: Colors.orange,
-          ),
-          hintText: _hintText,
-          labelText: _labelText,
-          labelStyle: TextStyle(color: Colors.orange),
-          focusedBorder:
-              OutlineInputBorder(borderSide: BorderSide(color: Colors.orange)),
-        ),
-        autofocus: true,
-        validator: (String value) {
-          return value.isEmpty ? "Please enter some text" : null;
-        },
-      ),
-    );
-  }
-}
+//// Form for adding task to TodoList
 
 class Fillup extends StatefulWidget {
   final List<Work> arguments;
